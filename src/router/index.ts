@@ -1,3 +1,4 @@
+import { adminRoutes } from '@/modules/admin/routes'
 import { authRoutes } from '@/modules/auth/routes'
 import ShopLayout from '@/modules/shop/layout/ShopLayout.vue'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -13,14 +14,25 @@ const router = createRouter({
         {
           path: '',
           name: 'shop.home',
-          component: () => import('@/modules/shop/views/ShopView.vue')
-        }
-      ]
+          component: () => import('@/modules/shop/views/ShopView.vue'),
+        },
+      ],
     },
 
     // auth routes
-    authRoutes
-  ]
+    authRoutes,
+
+    // admin routes
+    adminRoutes,
+
+    // 404
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      redirect: { name: 'shop.home' },
+      // component: () => import('@/modules/shared/views/NotFoundView.vue'),
+    },
+  ],
 })
 
 export default router

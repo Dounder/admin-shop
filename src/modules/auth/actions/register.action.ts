@@ -1,24 +1,29 @@
 import { tesloApi } from '@/api/teslo.api'
-import type { AuthResponse, User } from '../interfaces'
 import { isAxiosError } from 'axios'
+import type { AuthResponse, User } from '../interfaces'
 
-interface LoginError {
+interface RegisterError {
   ok: false
   message: string
 }
 
-interface LoginSuccess {
+interface RegisterSuccess {
   ok: true
   token: string
   user: User
 }
 
-export const loginAction = async (
+export const registerAction = async (
+  fullName: string,
   email: string,
   password: string
-): Promise<LoginError | LoginSuccess> => {
+): Promise<RegisterError | RegisterSuccess> => {
   try {
-    const { data } = await tesloApi.post<AuthResponse>('/auth/login', { email, password })
+    const { data } = await tesloApi.post<AuthResponse>('/auth/register', {
+      fullName,
+      email,
+      password,
+    })
 
     return {
       ok: true,
@@ -30,6 +35,6 @@ export const loginAction = async (
       return { ok: false, message: 'Invalid credentials' }
 
     console.error(error)
-    throw new Error('An error occurred while trying to login')
+    throw new Error('An error occurred while trying to register')
   }
 }

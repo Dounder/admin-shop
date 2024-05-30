@@ -119,7 +119,7 @@ const queryClient = useQueryClient()
 
 const { data: products = [] } = useQuery({
   queryKey: ['products', { page }],
-  queryFn: () => getProductsAction(page.value)
+  queryFn: () => getProductsAction(page.value),
 })
 
 watch(
@@ -134,13 +134,13 @@ watch(
 watchEffect(() => {
   queryClient.prefetchQuery({
     queryKey: ['products', { page: page.value + 1 }],
-    queryFn: () => getProductsAction(page.value + 1)
+    queryFn: () => getProductsAction(page.value + 1),
   })
 
   if (page.value > 1) {
     queryClient.prefetchQuery({
       queryKey: ['products', { page: page.value - 1 }],
-      queryFn: () => getProductsAction(page.value - 1)
+      queryFn: () => getProductsAction(page.value - 1),
     })
   }
 })
