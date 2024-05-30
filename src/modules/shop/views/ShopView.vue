@@ -97,17 +97,13 @@
 
   <ProductList v-else :products="products" />
 
-  <BottomPagination
-    :hasMoreData="!!products && products.length < 10"
-    :first-page="page === 1"
-    :page="page"
-  />
+  <ButtonPagination :hasMoreData="!!products && products.length < 10" :page="page" />
 </template>
 
 <script setup lang="ts">
 import { useQuery, useQueryClient } from '@tanstack/vue-query'
 
-import BottomPagination from '@/modules/common/components/BottomPagination.vue'
+import ButtonPagination from '@/modules/common/components/ButtonPagination.vue'
 import { getProductsAction } from '@/modules/products/actions'
 import ProductList from '@/modules/products/components/ProductList.vue'
 import { useRoute } from 'vue-router'

@@ -9,8 +9,6 @@ const isAdminGuard = (
   const authStore = useAuthStore()
 
   authStore.isAdmin ? next() : next({ name: 'shop.home' })
-
-  return next()
 }
 
 export default isAdminGuard
